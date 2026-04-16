@@ -1,91 +1,40 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Timer - 80 Questions en 60 Minutes</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quiz Timer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #timer { font-size: 2rem; color: red; }
+        #question { margin: 20px 0; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- En-tête -->
-        <header class="header">
-            <h1>Quiz Timer</h1>
-            <p class="subtitle">80 Questions en 60 Minutes</p>
-        </header>
+    <h1>Quiz Timer</h1>
+    <div id="question">Question 1 of 10</div>
+    <div id="timer">00:00</div>
+    <script>
+        let totalTime = 600; // Total time for the quiz in seconds
+        let currentTime = totalTime;
+        let questionNumber = 1;
 
-        <!-- Panneau principal -->
-        <main class="main-panel">
-            <!-- Timer circulaire -->
-            <div class="timer-section">
-                <div class="circular-timer">
-                    <svg class="progress-ring" width="250" height="250">
-                        <circle class="progress-ring-bg" cx="125" cy="125" r="110" />
-                        <circle class="progress-ring-circle" cx="125" cy="125" r="110" />
-                    </svg>
-                    <div class="timer-display">
-                        <div class="time">
-                            <span id="minutes">60</span>:<span id="seconds">00</span>
-                        </div>
-                        <div class="time-label">Temps restant</div>
-                    </div>
-                </div>
-            </div>
+        const questionDiv = document.getElementById("question");
+        const timerDiv = document.getElementById("timer");
 
-            <!-- Statistiques -->
-            <div class="stats-section">
-                <div class="stat-card">
-                    <label>Questions traitées</label>
-                    <div class="stat-content">
-                        <input type="number" id="currentQuestion" min="0" max="80" value="0">
-                        <span class="stat-max">/80</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="questionProgress"></div>
-                    </div>
-                    <div class="progress-text">
-                        <span id="progressPercent">0</span>% complété
-                    </div>
-                </div>
+        function updateTimer() {
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = currentTime % 60;
+            timerDiv.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            currentTime--;
 
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="label">Temps par question</span>
-                        <span class="value" id="timePerQuestion">45s</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="label">Questions/minute</span>
-                        <span class="value" id="questionsPerMin">1.3</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="label">Rythme idéal</span>
-                        <span class="value status-ideal">✓ En rythme</span>
-                    </div>
-                </div>
-            </div>
-        </main>
+            if (currentTime < 0) {
+                clearInterval(interval);
+                alert('Time is up!');
+            }
+        }
 
-        <!-- Contrôles -->
-        <div class="controls">
-            <button id="startBtn" class="btn btn-primary">Démarrer</button>
-            <button id="pauseBtn" class="btn btn-secondary" disabled>Pause</button>
-            <button id="resetBtn" class="btn btn-secondary">Réinitialiser</button>
-        </div>
-
-        <!-- Avertissements -->
-        <div id="warningBox" class="warning-box hidden">
-            <span class="warning-icon">⚠️</span>
-            <span id="warningText">Vous êtes en retard par rapport au rythme idéal</span>
-        </div>
-
-        <!-- Historique et notes -->
-        <div class="notes-section">
-            <h2>Notes rapides</h2>
-            <textarea id="notesArea" placeholder="Prenez vos notes ici..."></textarea>
-            <button id="saveNotesBtn" class="btn btn-small">Sauvegarder</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+        const interval = setInterval(updateTimer, 1000);
+    </script>
 </body>
 </html>
