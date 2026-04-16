@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Timer - 80 Questions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header class="header">
+            <h1>Quiz Timer</h1>
+            <p class="subtitle">80 Questions en 60 Minutes</p>
+        </header>
+
+        <!-- Panneau principal -->
+        <main class="main-panel">
+            <!-- Question actuelle -->
+            <div class="question-section">
+                <label>Question en cours</label>
+                <div class="question-display" id="questionDisplay">1</div>
+                <p class="question-info">Question <span id="currentNum">1</span> sur 80</p>
+            </div>
+
+            <!-- Timer global -->
+            <div class="timer-section">
+                <div class="timer-display">
+                    <div class="time-global" id="timeGlobal">60:00</div>
+                    <p class="timer-label">Temps restant (Global)</p>
+                </div>
+            </div>
+
+            <!-- Timer question actuelle -->
+            <div class="question-timer-section">
+                <label>Temps pour cette question</label>
+                <div class="question-timer-container">
+                    <svg class="timer-circle" width="200" height="200">
+                        <circle cx="100" cy="100" r="90" class="timer-bg" />
+                        <circle cx="100" cy="100" r="90" class="timer-fill" id="timerFill" />
+                    </svg>
+                    <div class="timer-center">
+                        <span class="timer-number" id="questionTime">45</span>
+                        <span class="timer-unit">sec</span>
+                    </div>
+                </div>
+                <p class="ideal-time">Temps idéal: 45 secondes</p>
+            </div>
+        </main>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <button id="startBtn" class="btn btn-primary">Démarrer</button>
+            <button id="pauseBtn" class="btn btn-secondary" disabled>Pause</button>
+            <button id="nextQuestionBtn" class="btn btn-success">Question suivante</button>
+            <button id="resetBtn" class="btn btn-secondary">Réinitialiser</button>
+        </div>
+
+        <!-- Avertissements -->
+        <div id="warningBox" class="warning-box hidden">
+            <span id="warningText"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
