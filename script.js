@@ -130,9 +130,9 @@ class QuizTimer {
         // Changement de couleur
         this.timerFill.classList.remove('orange', 'red');
         
-        if (percentageUsed >= 0.9) { // Plus de 90% du temps utilisé (Rouge)
+        if (percentageUsed >= 0.87) { // Plus de 87% du temps utilisé (Rouge)
             this.timerFill.classList.add('red');
-        } else if (percentageUsed >= 0.8) { // Plus de 80% du temps utilisé (Orange)
+        } else if (percentageUsed >= 0.78) { // Plus de 87% du temps utilisé (Orange)
             this.timerFill.classList.add('orange');
         }
     }
